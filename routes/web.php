@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
+
+
+Route::group(['middleware' => 'auth', 'prefix' => 'backoffice'], function() {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('level', LevelController::class);
+        Route::resource('subject', SubjectController::class);
+    });
+
+});
