@@ -22,8 +22,12 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
+            <div class="container py-3">
+                <h1 class="h2">{{ $header }}</h1>
+            </div>
+
             <!-- Page Content -->
-            <main class="container py-4">
+            <main class="container py-3">
                 {{ $slot }}
             </main>
         </div>

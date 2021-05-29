@@ -1,8 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Ajouter une Matières') }}
-        </h2>
     </x-slot>
 
     <x-card>
@@ -10,16 +8,20 @@
             @csrf
             
             <!-- Subject name -->
-            <div>
-                <x-label for="name" :value="__('Nom de la Matières')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <div class="form-group">
+                <label for="name">{{ __('Nom de la Matières') }}</label>
+                <input name="name" type="text" class="@error('name') is-invalid @enderror form-control" id="name" aria-describedby="Nom de la Matières" placeholder="Nom de la Matières">
+                @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
             </div>
 
             <div class="mt-4">
-                <x-button class="">
+                <button class="btn btn-success">
                     {{ __('Ajouter') }}
-                </x-button>
+                </button>
             </div>
         </form>
     </x-card>
