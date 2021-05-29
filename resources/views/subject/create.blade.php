@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-            {{ __('Ajouter une Matières') }}
+            {{ __('Ajouter une Matière') }}
     </x-slot>
 
     <x-card>
@@ -10,7 +10,12 @@
             <!-- Subject name -->
             <div class="form-group">
                 <label for="name">{{ __('Nom de la Matières') }}</label>
-                <input name="name" type="text" class="@error('name') is-invalid @enderror form-control" id="name" aria-describedby="Nom de la Matières" placeholder="Nom de la Matières" autofocus>
+                <input 
+                    name="name" type="text" 
+                    class="@error('name') is-invalid @enderror form-control" id="name" 
+                    aria-describedby="Nom de la Matières" placeholder="Nom de la Matières" autofocus
+                    value="{{ old('name') ?? '' }}"
+                >
                 @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
