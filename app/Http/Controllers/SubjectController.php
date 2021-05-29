@@ -24,6 +24,7 @@ class SubjectController extends Controller
         $data = request()->validate([
             'name' => ['required', 'unique:subjects,name']
         ]);
+        $data['name'] = ucwords(strtolower($data['name']));
 
         Subject::create($data);
         return redirect()->route('subject.index')->with('status', 'Matières crée avec succès.');
