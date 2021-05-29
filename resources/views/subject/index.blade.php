@@ -39,5 +39,6 @@
                 @endforeach
             </tbody>
           </table>
+          {{ $subjects->links() }}
     </x-card>
 </x-app-layout>
