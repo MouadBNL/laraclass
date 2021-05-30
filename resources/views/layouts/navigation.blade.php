@@ -8,6 +8,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                @if(Auth::user()->hasRole('admin'))
                 <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
@@ -47,6 +48,23 @@
                         <a class="dropdown-item" href="{{ route('user.create') }}">Ajouter</a>
                     </div>
                 </li>
+
+                @endif
+
+                @if(Auth::user()->hasAnyRole(['admin', 'prof']))
+
+                <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }} dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Enseignants
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{ route('user.index')}}">Voir tous</a>
+                        <a class="dropdown-item" href="{{ route('user.create') }}">Ajouter</a>
+                    </div>
+                </li>
+
+                @endif
 
                 
                 <li class="nav-item">
