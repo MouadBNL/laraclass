@@ -21,6 +21,16 @@
                         <a class="dropdown-item" href="{{ route('subject.create') }}">Ajouter</a>
                     </div>
                 </li>
+                <li class="nav-item {{ request()->routeIs('level.*') ? 'active' : '' }} dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="levelDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Niveaux
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="levelDropdown">
+                        <a class="dropdown-item" href="{{ route('level.index')}}">Voir tous</a>
+                        <a class="dropdown-item" href="{{ route('level.create') }}">Ajouter</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>

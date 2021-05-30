@@ -14,7 +14,8 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $levels = Level::paginate(20);
+        return view('level.index', compact(['levels']));
     }
 
     /**
@@ -24,7 +25,7 @@ class LevelController extends Controller
      */
     public function create()
     {
-        //
+        return view('level.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'name' => ['required', 'unique:levels,name']
+        ]);
+        $data['name'] = ucwords(strtolower($data['name']));
+
+        Level::create($data);
+        return redirect()->route('level.index')->with('status', 'Niveau crée avec succès.');
     }
 
     /**
@@ -57,7 +64,7 @@ class LevelController extends Controller
      */
     public function edit(Level $level)
     {
-        //
+        return view('level.edit', compact(['level']));
     }
 
     /**
@@ -67,9 +74,14 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Level $level)
+    public function update(Level $level)
     {
-        //
+        $data = request()->validate([
+            'name' => ['required', 'unique:subjects,name,'. $level->id .',id']
+        ]);
+
+        $level->update($data);
+        return redirect()->back()->with('status', 'Niveau modifier avec succès.');
     }
 
     /**
@@ -80,6 +92,7 @@ class LevelController extends Controller
      */
     public function destroy(Level $level)
     {
-        //
+        $level->delete();
+        return redirect()->route('level.index')->with('status', 'Niveau supprimer avec succès.');
     }
 }
