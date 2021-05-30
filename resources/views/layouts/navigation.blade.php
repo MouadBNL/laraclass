@@ -11,6 +11,8 @@
                 <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
+
+
                 <li class="nav-item {{ request()->routeIs('subject.*') ? 'active' : '' }} dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -21,6 +23,8 @@
                         <a class="dropdown-item" href="{{ route('subject.create') }}">Ajouter</a>
                     </div>
                 </li>
+
+
                 <li class="nav-item {{ request()->routeIs('level.*') ? 'active' : '' }} dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="levelDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -31,6 +35,20 @@
                         <a class="dropdown-item" href="{{ route('level.create') }}">Ajouter</a>
                     </div>
                 </li>
+
+
+                <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }} dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Enseignants
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{ route('user.index')}}">Voir tous</a>
+                        <a class="dropdown-item" href="{{ route('user.create') }}">Ajouter</a>
+                    </div>
+                </li>
+
+                
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>

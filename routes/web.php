@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backoffice'], function() {
     Route::middleware(['role:admin'])->group(function () {
         Route::resource('level', LevelController::class);
         Route::resource('subject', SubjectController::class);
+        Route::resource('user', UserController::class);
+        Route::put('/user-password/{user}', [UserPasswordController::class, 'update'])->name('user-password.update');
     });
 
 });
