@@ -27,7 +27,7 @@ class SubjectController extends Controller
         $data['name'] = ucwords(strtolower($data['name']));
 
         Subject::create($data);
-        return redirect()->route('subject.index')->with('status', 'Matières crée avec succès.');
+        return redirect()->route('subject.index')->with('status', 'Matière crée avec succès.');
     }
 
     public function show(Subject $subject)
@@ -47,12 +47,12 @@ class SubjectController extends Controller
         ]);
 
         $subject->update($data);
-        return redirect()->back()->with('status', 'Matières modifier avec succès.');
+        return redirect()->back()->with('status', 'Matière modifier avec succès.');
     }
 
     public function destroy(Subject $subject)
     {
         $subject->delete();
-        return redirect()->route('subject.index')->with('status', 'Matières supprimer avec succès.');
+        return redirect()->route('subject.index')->with('status', 'Matière supprimer avec succès.');
     }
 }
