@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Level;
+use App\Models\Subject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -14,7 +17,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::paginate(20);
+        return view('course.index', compact(['courses']));
     }
 
     /**
@@ -24,7 +28,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $levels     = Level::all();
+        $subjects   = Subject::all();
+        return view('course.create', compact('levels', 'subjects'));
     }
 
     /**
@@ -33,9 +39,28 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $data = request()->validate([
+            'title' => 'required',
+            'level' => ['required', 'exists:levels,id'],
+            'subject' => ['required', 'exists:subjects,id'],
+            'course_file' => ['required']
+        ]);
+
+
+        $file_name = Carbon::now()->format('Y-m-d') . "_" . request()->file('course_file')->getClientOriginalName();
+        $file = request()->file('course_file')->storeAs('courses', $file_name);
+        dd($file);
+
+        auth()->user()->courses()->create([
+            'title' => request('title'),
+            'level_id' => request('level'),
+            'subject_id' => request('subject'),
+            'link' => "/storage/" . $file_name
+        ]);
+
+        return redirect()->route('course.index')->with('status', 'Cours ajouter.');
     }
 
     /**

@@ -53,14 +53,14 @@
 
                 @if(Auth::user()->hasAnyRole(['admin', 'prof']))
 
-                <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }} dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                <li class="nav-item {{ request()->routeIs('course.*') ? 'active' : '' }} dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="courseDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Enseignants
+                        Cours
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ route('user.index')}}">Voir tous</a>
-                        <a class="dropdown-item" href="{{ route('user.create') }}">Ajouter</a>
+                    <div class="dropdown-menu" aria-labelledby="courseDropdown">
+                        <a class="dropdown-item" href="{{ route('course.index')}}">Voir tous</a>
+                        <a class="dropdown-item" href="{{ route('course.create') }}">Ajouter</a>
                     </div>
                 </li>
 

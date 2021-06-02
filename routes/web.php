@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
@@ -32,9 +33,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'backoffice'], function() {
 
     Route::middleware(['role:admin'])->group(function () {
         Route::resource('level', LevelController::class);
+
         Route::resource('subject', SubjectController::class);
+
         Route::resource('user', UserController::class);
         Route::put('/user-password/{user}', [UserPasswordController::class, 'update'])->name('user-password.update');
+
+        Route::resource('course', CourseController::class);
     });
 
 });
